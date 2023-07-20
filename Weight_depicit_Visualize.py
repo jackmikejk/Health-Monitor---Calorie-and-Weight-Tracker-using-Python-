@@ -41,7 +41,7 @@ def get_data_from_excel(filepath, sheet_name):
 def main():
     goal_weight = 147
     print("Goal Weight:", goal_weight)
-    data_extraction = get_data_from_excel("D:\Coding\Python\Code practise\Simple Weight Depict Visualize\Weight_Depicit\Calorie_Tracker.xlsx", "Sheet1")
+    data_extraction = get_data_from_excel(r"C:\Users\Michael Jackson\OneDrive\Calorie_Tracker.xlsx", "Sheet1")
     current_weight_data, calorie_intake_data = data_extraction
 
     weight_comparision(current_weight_data, goal_weight)
