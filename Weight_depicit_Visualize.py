@@ -2,11 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_the_chart(current_weight_data, calorie_intake_data):
+def plot_the_chart(calorie_intake_data, current_weight_data):
 
-    plt.bar(current_weight_data, calorie_intake_data)
-    plt.xlabel("Current Weight")
-    plt.ylabel("Calorie Intake")
+    plt.bar(calorie_intake_data, current_weight_data)
+    print(current_weight_data)
+    print(calorie_intake_data)
+    plt.xlabel("Calorie Intake")
+    plt.ylabel("Current Weight")
     plt.title("Calorie Intake vs Current Weight")
     plt.show()
 
@@ -35,14 +37,12 @@ def get_data_from_excel(filepath, sheet_name):
         return current_weight_data, calorie_intake_data
     except FileNotFoundError:
         print(f"File '{filepath}' not found.")
-    except Exception as e:
-        print(f"Error: {e}")
 
 def main():
     goal_weight = 147
     print("Goal Weight:", goal_weight)
     data_extraction = get_data_from_excel(r"C:\Users\Michael Jackson\OneDrive\Calorie_Tracker.xlsx", "Sheet1")
-    current_weight_data, calorie_intake_data = data_extraction
+    calorie_intake_data, current_weight_data = data_extraction
 
     weight_comparision(current_weight_data, goal_weight)
     plot_the_chart(current_weight_data, calorie_intake_data)
