@@ -5,8 +5,6 @@ import numpy as np
 def plot_the_chart(calorie_intake_data, current_weight_data):
 
     plt.bar(calorie_intake_data, current_weight_data)
-    print(current_weight_data)
-    print(calorie_intake_data)
     plt.xlabel("Calorie Intake")
     plt.ylabel("Current Weight")
     plt.title("Calorie Intake vs Current Weight")
@@ -19,8 +17,8 @@ def weight_comparision(current_weight_data, goal_weight):
 def get_data_from_excel(filepath, sheet_name):
     try:
         # Read the Excel file into a pandas DataFrame
-        xls = pd.ExcelFile(filepath)
-        df = pd.read_excel(xls, sheet_name=sheet_name)
+        xl = pd.ExcelFile(filepath)
+        df = pd.read_excel(xl, sheet_name=sheet_name)
 
         # Filter the rows with non-empty "Calorie Intake" and "Current Weight" values
         data = df.dropna(subset=["Calorie Intake", "Current Weight"])
