@@ -1,21 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
-"""def plot_the_chart(days, calorie_intake_data, current_weight_data):
-
-    for day, calorie_consumption in zip(days, calorie_intake_data):
-        if calorie_consumption < 1700:
-            plt.bar(day, calorie_consumption, color="green")
-        elif 1701 <= calorie_consumption <=1850:
-            plt.bar(day, calorie_consumption, color="#90EE90")
-        else:
-            plt.bar(day, calorie_consumption, color="red")
-    plt.plot(days, current_weight_data)
-    plt.xlabel("Day")
-    plt.ylabel("Calorie Intake")
-    plt.title("Calorie Depicit Progress")
-    plt.show()"""
 
 def plot_the_chart(days, calorie_intake_data, current_weight_data):
     # Create a figure and two subplots side by side
