@@ -9,7 +9,7 @@ Update Calorie Intake: Every day, record your calorie intake at breakfast, lunch
 
 Data Sync: The Excel file can be accessed from your phone or computer, as long as it is synced with OneDrive.
 
-Goal Weight Setting: Set your desired goal weight in the code. The project will calculate the required calorie consumption to reach your goal weight.
+Goal Weight Setting: Set your desired goal weight in the code. And decide the Calorie intake per day to attain the goal weight. 
 
 Analyze Progress: The code will fetch the data from the given location (Excel file) and generate a chart that showcases your calorie intake and weight progress over time.
 
