@@ -1,3 +1,8 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+def plot_the_chart(days, calorie_intake_data, current_weight_data):
+    # Create a figure and two subplots side by side
+    fig, (fig1, fig2) = plt.subplots(1, 2, figsize=(12, 5))
 # Plot the first chart for calorie intake data
     for day, calorie_consumption in zip(days, calorie_intake_data):
         if calorie_consumption <= 1700:
