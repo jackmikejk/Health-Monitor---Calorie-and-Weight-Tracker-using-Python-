@@ -8,7 +8,7 @@ def plot_the_chart(days, calorie_intake_data, current_weight_data):
 
     # Plot the first chart for calorie intake data
     for day, calorie_consumption in zip(days, calorie_intake_data):
-        if calorie_consumption < 1700:
+        if calorie_consumption <= 1700:
             fig1.bar(day, calorie_consumption, color="green")
         elif 1701 <= calorie_consumption <= 1850:
             fig1.bar(day, calorie_consumption, color="#90EE90")
