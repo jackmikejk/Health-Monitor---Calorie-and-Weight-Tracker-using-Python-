@@ -1,1 +1,100 @@
+import openpyxl
+import requests
 
+def get_calories(food_name):
+    query = food_name
+    api_url = 'https://api.api-ninjas.com/v1/nutrition?query={}'.format(query)
+    response = requests.get(api_url, headers={'X-Api-Key': 'qzroHQcs4PGupY4aRWApNg==qSZRPqFhJqO9r62I'})
+
+    if response.status_code == 200:
+        data = response.json()
+        print(response.text)
+        return data
+
+    else:
+        print("Error", response.text, response.status_code)
+
+def excel_entry (file_path, headers, food_data):
+    workbook = openpyxl.load_workbook(file_path)
+    sheet = workbook.active
+    sheet.append(headers)
+
+    for food_item in food_data:
+        datas_in_rows = [food_item.get(header, '') for header in headers]
+        sheet.append(datas_in_rows)
+
+
+
+    workbook.save(file_path)
+    print("Data saved to the Excel file.")
+
+if __name__ == '__main__':
+    food_name = input("Enter the food name: ")
+    calories = get_calories(food_name)
+
+    file_path = r"C:\Users\Michael Jackson\OneDrive\New Microsoft Excel Worksheet.xlsx"
+    headers = ["name", "calories", "serving_size_g", "fat_total_g", "fat_saturated_g", "protein_g", "sodium_mg", "potassium_mg", "cholesterol_mg", "carbohydrates_total_g", "fiber_g", "sugar_g"]
+    food_data = calories
+    exl_data = excel_entry(file_path, headers, food_data)
+
+
+
+"""
+import pandas as pd
+import matplotlib.pyplot as plt
+def plot_the_chart(days, calorie_intake_data, current_weight_data):
+    # Create a figure and two subplots side by side
+    fig, (fig1, fig2) = plt.subplots(1, 2, figsize=(12, 5))
+# Plot the first chart for calorie intake data
+    for day, calorie_consumption in zip(days, calorie_intake_data):
+        if calorie_consumption <= 1700:
+            fig1.bar(day, calorie_consumption, color="green")
+        elif 1701 <= calorie_consumption <= 1850:
+            fig1.bar(day, calorie_consumption, color="#90EE90")
+        else:
+            fig1.bar(day, calorie_consumption, color="red")
+    fig1.set_xlabel("Day")
+    fig1.set_ylabel("Calorie Intake")
+    fig1.set_title("Calorie Intake Progress")
+    # Plot the second chart for current weight data
+    fig2.plot(days, current_weight_data, marker='o', linestyle='-', color='b')
+    fig2.set_xlabel("Day")
+    fig2.set_ylabel("Current Weight")
+    fig2.set_title("Current Weight Progress")
+    # Adjust spacing between the plots
+    plt.tight_layout()
+    plt.show()
+def weight_comparision(current_weight_data, goal_weight):
+    if goal_weight == current_weight_data:
+        print("You got this!")
+def get_data_from_excel(filepath, sheet_name):
+    try:
+        # Read the Excel file into a pandas DataFrame
+        xcl = pd.ExcelFile(filepath)
+        df = pd.read_excel(xcl, sheet_name=sheet_name)
+        # Filter the rows with non-empty "Calorie Intake" and "Current Weight" values
+        data = df.dropna(subset=["Day", "Calorie Intake", "Current Weight"])
+        # Get the "Day", "Calorie Intake" and "Current Weight" columns as lists
+        #data.loc[:, "Day"] = data["Day"].astype(int)
+        days = data["Day"].tolist()
+        calorie_intake_data = data["Calorie Intake"].tolist()
+        current_weight_data = data["Current Weight"].tolist()
+        print("Day:")
+        print(days)
+        print("Calorie Intake Data:")
+        print(calorie_intake_data)
+        print("Current Weight Data:")
+        print(current_weight_data)
+        return days, calorie_intake_data, current_weight_data
+    except FileNotFoundError:
+        print(f"File '{filepath}' not found.")
+def main():
+    goal_weight = 147
+    print("Goal Weight:", goal_weight)
+    data_extraction = get_data_from_excel(r"C:\#Users\Michael Jackson\OneDrive\Calorie_Tracker.xlsx", "Sheet1")
+    days, calorie_intake_data, current_weight_data = data_extraction
+    weight_comparision(current_weight_data, goal_weight)
+    plot_the_chart(days, calorie_intake_data, current_weight_data)
+if __name__ == "__main__":
+    main()
+"""
