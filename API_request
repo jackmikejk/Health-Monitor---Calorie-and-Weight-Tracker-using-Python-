@@ -14,15 +14,13 @@ def get_calories(food_name):
     else:
         print("Error", response.text, response.status_code)
 
-def serving_size_manipulation(food_data):
-    serving_extract = food_data['serving_size_g']
-    calorie_extract = food_data['calories']
 
 def exl_data_entry(file_path, food_data):
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active
-    sheet['A1'] = "FOOD NAME"
-    sheet['B1'] = "CALORIES"
+    sheet['A1'] = "ENTERED FOOD NAME"
+    sheet['B1'] = "FOOD NAME"
+    sheet['C1'] = "CALORIES"
 
     last_used_row = sheet.max_row
     current_row = last_used_row + 1
@@ -32,22 +30,17 @@ def exl_data_entry(file_path, food_data):
         item_name = extract_food_data['name']
         item_calories = extract_food_data['calories']
         #saving that in rows under the category
-        sheet[f'A{current_row}'] = item_name
-        sheet[f'B{current_row}'] = item_calories
+        sheet[f'A{current_row}'] = food_name
+        sheet[f'B{current_row}'] = item_name
+        sheet[f'C{current_row}'] = item_calories
         current_row += 1
 
     workbook.save(file_path)
     print("Data saved to the Excel file.")
 if __name__ == '__main__':
     food_name = input("Enter the food name: ")
-    portion = input("Enter the portion (e.g., ml/g): ")
     calories = get_calories(food_name)
 
     file_path = r"C:\Users\Michael Jackson\OneDrive\New Microsoft Excel Worksheet.xlsx"
     food_data = calories
-    serving_calculation = serving_size_manipulation(food_data)
     exl_data = exl_data_entry(file_path, food_data)
-
-
-
-
